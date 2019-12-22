@@ -41,7 +41,7 @@ public class RecipeForm extends AppCompatActivity {
         recipe = findViewById(R.id.editTextRecipe);
         Intent myLocalIntent = getIntent();
         Bundle dataBundle = myLocalIntent.getExtras();
-        if (dataBundle.getLong("RecipeID") > 0) {
+        if (dataBundle != null) {
             editRecipe = true;
             editRecipeObject = Recipe.findById(Recipe.class, dataBundle.getLong("RecipeID"));
             name.setText(editRecipeObject.name);
