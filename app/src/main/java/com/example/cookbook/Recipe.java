@@ -3,7 +3,9 @@ import androidx.annotation.NonNull;
 
 import com.orm.SugarRecord;
 
-public class Recipe extends SugarRecord<Recipe>{
+import java.io.Serializable;
+
+public class Recipe extends SugarRecord<Recipe> {
     public String name;
     public String ingredients;
     public String recipe;

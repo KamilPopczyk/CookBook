@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getTitle().toString()){
                             case "Edytuj":
+                                Bundle dataBundle = new Bundle();
+                                Intent editRecipeActivity = new Intent(MainActivity.this, RecipeForm.class);
+                                dataBundle.putLong("RecipeID", recipes.get(pos).getId());
+                                editRecipeActivity.putExtras(dataBundle);
+                                startActivity(editRecipeActivity);
                                 break;
                             case "Usuń":
                                 Recipe selectedRecipe = recipes.get(pos);

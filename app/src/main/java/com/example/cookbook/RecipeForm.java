@@ -1,5 +1,6 @@
 package com.example.cookbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,8 @@ public class RecipeForm extends AppCompatActivity {
     private TextInputEditText name;
     private EditText ingredients;
     private EditText recipe;
+    private Boolean editRecipe = false;
+    private Recipe editRecipeObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +39,31 @@ public class RecipeForm extends AppCompatActivity {
         name = findViewById(R.id.textInputName);
         ingredients = findViewById(R.id.editTextIngredients);
         recipe = findViewById(R.id.editTextRecipe);
+        Intent myLocalIntent = getIntent();
+        Bundle dataBundle = myLocalIntent.getExtras();
+        if (dataBundle.getLong("RecipeID") > 0) {
+            editRecipe = true;
+            editRecipeObject = Recipe.findById(Recipe.class, dataBundle.getLong("RecipeID"));
+            name.setText(editRecipeObject.name);
+            ingredients.setText(editRecipeObject.ingredients);
+            recipe.setText(editRecipeObject.recipe);
+        }
 
 
 
         buttonRecipeSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Recipe recipeDb = new Recipe(name.getText().toString(),
-                        ingredients.getText().toString(), recipe.getText().toString());
-                recipeDb.save();
+                if (editRecipe) {
+                    editRecipeObject.name = name.getText().toString();
+                    editRecipeObject.ingredients = ingredients.getText().toString();
+                    editRecipeObject.recipe = recipe.getText().toString();
+                    editRecipeObject.save();
+                } else {
+                    Recipe recipeDb = new Recipe(name.getText().toString(),
+                            ingredients.getText().toString(), recipe.getText().toString());
+                    recipeDb.save();
+                }
                 finish();
             }
         });
