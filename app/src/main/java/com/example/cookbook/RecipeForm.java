@@ -1,5 +1,6 @@
 package com.example.cookbook;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ public class RecipeForm extends AppCompatActivity {
     private EditText recipe;
     private Boolean editRecipe = false;
     private Recipe editRecipeObject;
+    private Intent myLocalIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class RecipeForm extends AppCompatActivity {
         name = findViewById(R.id.textInputName);
         ingredients = findViewById(R.id.editTextIngredients);
         recipe = findViewById(R.id.editTextRecipe);
-        Intent myLocalIntent = getIntent();
+        myLocalIntent = getIntent();
         Bundle dataBundle = myLocalIntent.getExtras();
         if (dataBundle != null) {
             editRecipe = true;
@@ -64,6 +66,7 @@ public class RecipeForm extends AppCompatActivity {
                             ingredients.getText().toString(), recipe.getText().toString());
                     recipeDb.save();
                 }
+                setResult(101, myLocalIntent);
                 finish();
             }
         });

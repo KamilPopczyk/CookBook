@@ -2,12 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cookbook">
 
-    <application android:label="@string/app_name"
-        android:name="com.orm.SugarApp">
+    <application
+        android:name="com.orm.SugarApp"
+        android:label="@string/app_name">
+        <activity
+            android:name=".RecipeView"
+            android:label="@string/title_activity_recipe_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".RecipeForm"
             android:label="@string/title_activity_recipe_form"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -18,10 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="DATABASE" android:value="cookbook.db" />
-        <meta-data android:name="VERSION" android:value="2" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example.cookbook" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="cookbook.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.example.cookbook" />
     </application>
 
 </manifest>

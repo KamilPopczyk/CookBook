@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent recipeFormActivity = new Intent(MainActivity.this, RecipeForm.class);
-                startActivity(recipeFormActivity);
+                startActivityForResult(recipeFormActivity, 101);
                 reloadRecipeList();
             }
         });
@@ -55,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
         recipeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
-                view.setSelected(true);
+//                view.setSelected(true);
+                Bundle dataBundle = new Bundle();
+                Intent viewRecipeActivity = new Intent(MainActivity.this, RecipeView.class);
+                dataBundle.putLong("RecipeID", recipes.get(position).getId());
+                viewRecipeActivity.putExtras(dataBundle);
+                startActivity(viewRecipeActivity);
 //                Log.d("INFO", recipes.get(position).toString());
             }
         });
@@ -76,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                                 Intent editRecipeActivity = new Intent(MainActivity.this, RecipeForm.class);
                                 dataBundle.putLong("RecipeID", recipes.get(pos).getId());
                                 editRecipeActivity.putExtras(dataBundle);
-                                startActivity(editRecipeActivity);
+                                startActivityForResult(editRecipeActivity, 101);
+                                reloadRecipeList();
                                 break;
                             case "Usuń":
                                 Recipe selectedRecipe = recipes.get(pos);
@@ -117,6 +123,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == 101 ) {
+                reloadRecipeList();
+            }
+        }
+        catch (Exception e) {
+        }
     }
 
     private void reloadRecipeList() {
