@@ -1,8 +1,13 @@
 package com.example.cookbook;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,24 +26,39 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.Console;
 import java.io.File;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    SearchView searchViewRecipe;
     ListView recipeListView;
     ArrayAdapter<Recipe> adapter;
     List<Recipe> recipes;
+    SensorManager sensorManager;
+
+    float accelertionValue;
+    float accelerationLastValue;
+    float accelerationShake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        searchViewRecipe = findViewById(R.id.searchViewRecipe);
         recipeListView = findViewById(R.id.recipeListView);
         setSupportActionBar(toolbar);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        accelertionValue = SensorManager.GRAVITY_EARTH;
+        accelerationLastValue = SensorManager.GRAVITY_EARTH;
+        accelerationShake = 0.00f;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         reloadRecipeList();
@@ -49,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
                 Intent recipeFormActivity = new Intent(MainActivity.this, RecipeForm.class);
                 startActivityForResult(recipeFormActivity, 101);
                 reloadRecipeList();
+            }
+        });
+
+
+        searchViewRecipe.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
 
@@ -102,6 +136,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            accelerationLastValue = accelertionValue;
+            accelertionValue = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            float delta = accelertionValue - accelerationLastValue;
+            accelerationShake = accelerationShake * 0.9f + delta;
+
+//            Log.i("ShakeEvent", Float.toString(accelerationShake));
+            if (accelerationShake > 9) {
+                Bundle dataBundle = new Bundle();
+                Intent viewRecipeActivity = new Intent(MainActivity.this, RecipeView.class);
+                dataBundle.putLong("RecipeID", new Random().nextInt(recipes.size()));
+                viewRecipeActivity.putExtras(dataBundle);
+                startActivity(viewRecipeActivity);
+                Toast toast = Toast.makeText(MainActivity.this, "Wybrano losowy przepis", Toast.LENGTH_LONG);
+                toast.show();
+
+            }
+
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

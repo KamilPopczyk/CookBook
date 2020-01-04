@@ -10,8 +10,8 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputName"
-        android:layout_width="409dp"
-        android:layout_height="45dp"
+        android:layout_width="341dp"
+        android:layout_height="42dp"
         android:layout_marginTop="16dp"
         android:hint="Nazwa"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +31,8 @@
 
     <EditText
         android:id="@+id/editTextIngredients"
-        android:layout_width="409dp"
-        android:layout_height="123dp"
+        android:layout_width="338dp"
+        android:layout_height="122dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Składniki"
@@ -46,16 +46,29 @@
 
     <EditText
         android:id="@+id/editTextRecipe"
-        android:layout_width="409dp"
-        android:layout_height="133dp"
-        android:layout_marginBottom="224dp"
+        android:layout_width="336dp"
+        android:layout_height="137dp"
+        android:layout_marginBottom="164dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Przepis"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/buttonSave"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

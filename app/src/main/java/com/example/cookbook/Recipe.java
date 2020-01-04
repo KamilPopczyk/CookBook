@@ -3,7 +3,6 @@ import androidx.annotation.NonNull;
 
 import com.orm.SugarRecord;
 
-import java.io.Serializable;
 
 public class Recipe extends SugarRecord<Recipe> {
     public String name;

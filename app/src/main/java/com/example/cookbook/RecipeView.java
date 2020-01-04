@@ -30,7 +30,7 @@ public class RecipeView extends AppCompatActivity {
         myLocalIntent = getIntent();
         Bundle dataBundle = myLocalIntent.getExtras();
         Recipe recipe = Recipe.findById(Recipe.class, dataBundle.getLong("RecipeID"));
-        textViewName.setText(recipe.name);
+        textViewName.setText(recipe.name.toUpperCase());
         textViewIngredients.setText(recipe.ingredients);
         textViewRecipe.setText(recipe.recipe);
     }
