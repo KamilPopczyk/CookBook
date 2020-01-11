@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,7 @@ public class RecipeForm extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_form);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Dodawanie nowego przepisu");
         buttonRecipeSave = findViewById(R.id.buttonSave);
         name = findViewById(R.id.textInputName);
         ingredients = findViewById(R.id.editTextIngredients);
@@ -61,10 +63,12 @@ public class RecipeForm extends AppCompatActivity {
                     editRecipeObject.ingredients = ingredients.getText().toString();
                     editRecipeObject.recipe = recipe.getText().toString();
                     editRecipeObject.save();
+                    Toast.makeText(RecipeForm.this, "Edycja przepisu " + editRecipeObject.name, Toast.LENGTH_LONG).show();
                 } else {
                     Recipe recipeDb = new Recipe(name.getText().toString(),
                             ingredients.getText().toString(), recipe.getText().toString());
                     recipeDb.save();
+                    Toast.makeText(RecipeForm.this, "Zapisano nowy przepis", Toast.LENGTH_LONG).show();
                 }
                 setResult(101, myLocalIntent);
                 finish();
