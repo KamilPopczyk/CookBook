@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,12 +28,16 @@ public class RecipeView extends AppCompatActivity {
         textViewName = findViewById(R.id.textViewName);
         textViewIngredients = findViewById(R.id.textViewIngredients);
         textViewRecipe = findViewById(R.id.textViewRecipe);
+        // scrolling
+        textViewIngredients.setMovementMethod(new ScrollingMovementMethod());
+        textViewRecipe.setMovementMethod(new ScrollingMovementMethod());
         myLocalIntent = getIntent();
         Bundle dataBundle = myLocalIntent.getExtras();
         Recipe recipe = Recipe.findById(Recipe.class, dataBundle.getLong("RecipeID"));
         textViewName.setText(recipe.name.toUpperCase());
         textViewIngredients.setText(recipe.ingredients);
         textViewRecipe.setText(recipe.recipe);
+
     }
 
 }

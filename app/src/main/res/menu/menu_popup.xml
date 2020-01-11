@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/zero"
+        android:title="Dodaj/usuń lista ulubionych" />
+    <item
         android:id="@+id/one"
         android:title="Edytuj" />
     <item

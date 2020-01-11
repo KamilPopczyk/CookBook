@@ -13,9 +13,12 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.orm.SugarDb;
+import com.orm.query.Condition;
+import com.orm.query.Select;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ListAdapter;
 
 import android.util.Log;
@@ -31,6 +34,7 @@ import android.widget.Toast;
 
 import java.io.Console;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Recipe> adapter;
     List<Recipe> recipes;
     SensorManager sensorManager;
+
+    boolean favouriteListClicked;
 
     float accelertionValue;
     float accelerationLastValue;
@@ -61,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
         accelerationShake = 0.00f;
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fabFavouriteList = findViewById(R.id.fabFavouriteList);
         reloadRecipeList();
+        favouriteListClicked = false;
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +77,31 @@ public class MainActivity extends AppCompatActivity {
                 Intent recipeFormActivity = new Intent(MainActivity.this, RecipeForm.class);
                 startActivityForResult(recipeFormActivity, 101);
                 reloadRecipeList();
+            }
+        });
+
+        fabFavouriteList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(favouriteListClicked){
+                    reloadRecipeList();
+                    favouriteListClicked = false;
+                    fabFavouriteList.setImageResource(android.R.drawable.btn_star);
+                }
+                else {
+                    List<FavouriteRecipe> favouriteRecipes = FavouriteRecipe.listAll(FavouriteRecipe.class);
+                    Log.d("INFO", favouriteRecipes.toString());
+                    List<Recipe> favRecipes = new ArrayList<>();
+                    for (FavouriteRecipe favRecipe: favouriteRecipes) {
+                        favRecipes.add(favRecipe.recipe);
+                    }
+                    recipes = favRecipes;
+                    adapter = new ArrayAdapter<Recipe>(MainActivity.this, android.R.layout.simple_list_item_1, recipes);
+                    recipeListView.setAdapter(adapter);
+                    favouriteListClicked = true;
+                    fabFavouriteList.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
+                    Toast.makeText(MainActivity.this, "Lista ulubionych", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -109,7 +142,23 @@ public class MainActivity extends AppCompatActivity {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+                        Recipe selectedRecipe = recipes.get(pos);
                         switch (item.getTitle().toString()){
+                            case "Dodaj/usuń lista ulubionych":
+                                List<FavouriteRecipe> favouriteRecipeFoundList =
+                                        Select.from(FavouriteRecipe.class)
+                                        .where(Condition.prop("recipe").eq(selectedRecipe.getId().toString()))
+                                        .list();
+                                if (favouriteRecipeFoundList.isEmpty()) {
+                                    FavouriteRecipe favouriteRecipe = new FavouriteRecipe(selectedRecipe);
+                                    favouriteRecipe.save();
+                                    Toast.makeText(MainActivity.this, "Dodano do ulubionych: " + selectedRecipe.name, Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    favouriteRecipeFoundList.get(0).delete();
+                                    Toast.makeText(MainActivity.this, "Usunięto z ulubionych: " + selectedRecipe.name, Toast.LENGTH_LONG).show();
+                                }
+                                break;
                             case "Edytuj":
                                 Bundle dataBundle = new Bundle();
                                 Intent editRecipeActivity = new Intent(MainActivity.this, RecipeForm.class);
@@ -119,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                                 reloadRecipeList();
                                 break;
                             case "Usuń":
-                                Recipe selectedRecipe = recipes.get(pos);
                                 String recipeName = selectedRecipe.name;
                                 selectedRecipe.delete();
                                 Toast.makeText(MainActivity.this,"Usunięto : " + recipeName, Toast.LENGTH_SHORT).show();
