@@ -64,4 +64,40 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewName"
         app:layout_constraintVertical_bias="0.197" />
 
+    <LinearLayout
+        android:layout_width="255dp"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecipe">
+
+        <RatingBar
+            android:id="@+id/ratingBarPortionSize"
+            style="@style/ImageRatingBarPortion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <RatingBar
+            android:id="@+id/ratingBarTime"
+            style="@style/ImageRatingBarTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <RatingBar
+            android:id="@+id/ratingBarDifficultyLevel"
+            style="@style/ImageRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:numStars="5"
+            android:stepSize="1" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

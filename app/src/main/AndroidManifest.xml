@@ -26,7 +26,7 @@
 
         <meta-data
             android:name="DATABASE"
-            android:value="cb2.db" />
+            android:value="cookbook_db.db" />
         <meta-data
             android:name="VERSION"
             android:value="1" />
