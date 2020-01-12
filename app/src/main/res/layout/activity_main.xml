@@ -10,10 +10,10 @@
         android:id="@+id/fabFavouriteList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:clickable="true"
         app:layout_anchor="@+id/fab"
-        android:layout_gravity="bottom"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/heart" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -30,6 +30,6 @@
         android:layout_height="180dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/plus" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -43,7 +43,7 @@ public class RecipeForm extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_form);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Dodawanie nowego przepisu");
+        getSupportActionBar().setTitle("Dodawanie nowego przepisu");
         buttonRecipeSave = findViewById(R.id.buttonSave);
         name = findViewById(R.id.textInputName);
         ingredients = findViewById(R.id.editTextIngredients);
@@ -56,6 +56,7 @@ public class RecipeForm extends AppCompatActivity {
         if (dataBundle != null) {
             editRecipe = true;
             editRecipeObject = Recipe.findById(Recipe.class, dataBundle.getLong("RecipeID"));
+            getSupportActionBar().setTitle("Edytowanie przepisu: " + editRecipeObject.name);
             name.setText(editRecipeObject.name);
             ingredients.setText(editRecipeObject.ingredients);
             recipe.setText(editRecipeObject.recipe);

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".RecipeForm"
+    tools:showIn="@layout/activity_recipe_form">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputName"
+        android:layout_width="341dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:hint="Nazwa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        android:text="zapisz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextIngredients"
+        android:layout_width="609dp"
+        android:layout_height="357dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Składniki"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/editTextRecipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputName"
+        app:layout_constraintVertical_bias="0.376" />
+
+    <EditText
+        android:id="@+id/editTextRecipe"
+        android:layout_width="609dp"
+        android:layout_height="365dp"
+        android:layout_marginBottom="220dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Przepis"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
+    <LinearLayout
+        android:layout_width="255dp"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRecipe">
+
+        <RatingBar
+            android:id="@+id/ratingBarPortionSize"
+            style="@style/ImageRatingBarPortion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <RatingBar
+            android:id="@+id/ratingBarTime"
+            style="@style/ImageRatingBarTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <RatingBar
+            android:id="@+id/ratingBarDifficultyLevel"
+            style="@style/ImageRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:numStars="5"
+            android:stepSize="1" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

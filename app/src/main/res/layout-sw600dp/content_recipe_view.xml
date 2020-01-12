@@ -27,8 +27,8 @@
 
     <TextView
         android:id="@+id/textViewIngredients"
-        android:layout_width="339dp"
-        android:layout_height="160dp"
+        android:layout_width="609dp"
+        android:layout_height="365dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
         android:text="TextView"
@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/textViewRecipe"
-        android:layout_width="339dp"
-        android:layout_height="160dp"
+        android:layout_width="609dp"
+        android:layout_height="365dp"
         android:autoText="false"
         android:fillViewport="true"
         android:scrollbars="vertical"

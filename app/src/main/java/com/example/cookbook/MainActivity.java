@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 if(favouriteListClicked){
                     reloadRecipeList();
                     favouriteListClicked = false;
-                    fabFavouriteList.setImageResource(android.R.drawable.btn_star);
+                    fabFavouriteList.setImageResource(R.drawable.heart);
                 }
                 else {
                     List<FavouriteRecipe> favouriteRecipes = FavouriteRecipe.listAll(FavouriteRecipe.class);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter = new ArrayAdapter<Recipe>(MainActivity.this, android.R.layout.simple_list_item_1, recipes);
                     recipeListView.setAdapter(adapter);
                     favouriteListClicked = true;
-                    fabFavouriteList.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
+                    fabFavouriteList.setImageResource(R.drawable.cancel);
                     Toast.makeText(MainActivity.this, "Lista ulubionych", Toast.LENGTH_LONG).show();
                 }
             }
