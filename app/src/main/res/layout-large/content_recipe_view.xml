@@ -27,8 +27,8 @@
 
     <TextView
         android:id="@+id/textViewIngredients"
-        android:layout_width="609dp"
-        android:layout_height="365dp"
+        android:layout_width="432dp"
+        android:layout_height="216dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
         android:text="TextView"
@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/textViewRecipe"
-        android:layout_width="609dp"
-        android:layout_height="365dp"
+        android:layout_width="432dp"
+        android:layout_height="216dp"
         android:autoText="false"
         android:fillViewport="true"
         android:scrollbars="vertical"
@@ -69,6 +69,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewRecipe">
 
@@ -115,6 +116,7 @@
         android:text="Przepis"
         app:layout_constraintBottom_toTopOf="@+id/textViewRecipe"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewIngredients" />
 

@@ -27,29 +27,31 @@
 
     <TextView
         android:id="@+id/textViewIngredients"
-        android:layout_width="609dp"
-        android:layout_height="365dp"
+        android:layout_width="329dp"
+        android:layout_height="198dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
 
     <TextView
         android:id="@+id/textViewRecipe"
-        android:layout_width="611dp"
-        android:layout_height="364dp"
+        android:layout_width="329dp"
+        android:layout_height="198dp"
         android:autoText="false"
         android:fillViewport="true"
         android:scrollbars="vertical"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/textViewIngredients"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
 
     <View
         android:id="@+id/divider"
@@ -70,7 +72,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRecipe">
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecipe"
+        app:layout_constraintVertical_bias="0.609">
 
         <RatingBar
             android:id="@+id/ratingBarPortionSize"
@@ -105,6 +108,7 @@
         android:text="Składniki"
         app:layout_constraintBottom_toTopOf="@+id/textViewIngredients"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -115,7 +119,9 @@
         android:text="Przepis"
         app:layout_constraintBottom_toTopOf="@+id/textViewRecipe"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewIngredients" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.912" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
